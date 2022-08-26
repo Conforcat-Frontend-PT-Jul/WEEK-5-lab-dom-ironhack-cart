@@ -47,6 +47,28 @@ function removeProduct(event) {
 
 function createProduct() {
   //... your code goes here
+  const firstProduct = document.querySelector('.product');
+  const newProduct = firstProduct.cloneNode(true);
+  const newProductName = document.querySelectorAll('.create-product input')[0].value;
+  const newProductPrice = document.querySelectorAll('.create-product input')[1].value;
+
+  const templateProduct = document.querySelector('.create-product');
+
+  newProduct.querySelector('.price span').innerHTML =  newProductPrice;
+  newProduct.querySelector('.name span').innerHTML = newProductName;
+  newProduct.querySelector('.quantity input').value = 0;
+  firstProduct.parentNode.appendChild(newProduct);
+  const newRemoveButton = newProduct.querySelector('.btn-remove');
+  newRemoveButton.addEventListener('click', removeProduct);
+  calculateAll();
+
+  //document.querySelector('.create-product').parentNode.appendChild(templateProduct);
+  //document.querySelector('.create-product').parentNode.removeChild(document.querySelector('.create-product'));
+  
+  //document.querySelector('tfoot').parentNode.removeChild = document.querySelector('tfoot');
+  //document.querySelector('tfoot').appendChild(templateProduct);
+  //document.querySelector('.create-product').replaceWith(templateProduct);
+  
 }
 
 window.addEventListener('load', () => {
@@ -60,4 +82,8 @@ window.addEventListener('load', () => {
   for(i=0; i<removeButtons.length;i++) {
     removeButtons[i].addEventListener('click', removeProduct);
   }
+
+  const addProduct = document.getElementById('create');
+  addProduct.addEventListener('click', createProduct);
+
 });
