@@ -11,12 +11,7 @@ function updateSubtotal(product) {
 }
 
 function calculateAll() {
-  // code in the following two lines is added just for testing purposes.
-  // it runs when only iteration 1 is completed. at later point, it can be removed.
- // const singleProduct = document.querySelector('.product');
- // console.log(singleProduct)
-  // updateSubtotal(singleProduct);
-  // end of test
+
 
   // ITERATION 2
   const productsArr = document.querySelectorAll('.product');
@@ -36,7 +31,7 @@ function calculateAll() {
 
 function removeProduct(event) {
   const target = event.currentTarget;
-  console.log('The target in remove is:', target);
+  //console.log('The target in remove is:', target);
   //... your code goes here
   const targetElem = target.parentNode.parentNode;
   targetElem.parentNode.removeChild(targetElem);
@@ -47,28 +42,32 @@ function removeProduct(event) {
 
 function createProduct() {
   //... your code goes here
+
+  // Grab a product row (the first one) and clone it
   const firstProduct = document.querySelector('.product');
   const newProduct = firstProduct.cloneNode(true);
+
+  // Store new inputted product name and price into variables
   const newProductName = document.querySelectorAll('.create-product input')[0].value;
   const newProductPrice = document.querySelectorAll('.create-product input')[1].value;
 
-  const templateProduct = document.querySelector('.create-product');
-
+  // Modify DOM: replace elements with previously created variable content
   newProduct.querySelector('.price span').innerHTML =  newProductPrice;
   newProduct.querySelector('.name span').innerHTML = newProductName;
   newProduct.querySelector('.quantity input').value = 0;
+
+  //Append the cloned and modified DOM element (tr) in the products table
   firstProduct.parentNode.appendChild(newProduct);
+
+  // Add event liistener to the new Remove button and recalculate total
   const newRemoveButton = newProduct.querySelector('.btn-remove');
   newRemoveButton.addEventListener('click', removeProduct);
   calculateAll();
 
-  //document.querySelector('.create-product').parentNode.appendChild(templateProduct);
-  //document.querySelector('.create-product').parentNode.removeChild(document.querySelector('.create-product'));
-  
-  //document.querySelector('tfoot').parentNode.removeChild = document.querySelector('tfoot');
-  //document.querySelector('tfoot').appendChild(templateProduct);
-  //document.querySelector('.create-product').replaceWith(templateProduct);
-  
+  //Clear the template input fields
+  document.querySelectorAll('.create-product input')[0].value = '';
+  document.querySelectorAll('.create-product input')[1].value = '';
+
 }
 
 window.addEventListener('load', () => {
@@ -79,9 +78,7 @@ window.addEventListener('load', () => {
 
   const removeButtons = document.querySelectorAll('.btn-remove');
   
-  for(i=0; i<removeButtons.length;i++) {
-    removeButtons[i].addEventListener('click', removeProduct);
-  }
+  removeButtons.forEach((button) => button.addEventListener('click', removeProduct));
 
   const addProduct = document.getElementById('create');
   addProduct.addEventListener('click', createProduct);
