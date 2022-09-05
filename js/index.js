@@ -4,32 +4,23 @@
 
 
 
-function updateSubtotal(product) {
+function updateSubtotal(multipleProducts) {
   
   const price = document.querySelector('.price span ').innerText;
   const quantity = document.querySelector('input').value;
   let productX = price *quantity;
-
   document.querySelector('.subtotal span').innerText = productX;
 }
  
 
-
-
-
-
-
-
-function calculateAll(products) {
+function calculateAll() {
  
   const multipleProducts = document.getElementsByClassName(".product");
   
 
   updateSubtotal(multipleProducts);
+}
 
-     // Para modificar un estado:
-    // status.innerText = 'offline';
-  }
 
 
 
